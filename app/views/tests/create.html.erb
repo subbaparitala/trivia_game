@@ -1,0 +1,34 @@
+<div class="container-fluid" style="background:#EDEDEE">
+  <div class="container">
+  <div class="row" style="margin-bottom:10px;margin-top:10px;">
+    <div class="col-md-12">
+    </div>
+  </div>
+  <!-- welcome content -->
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1"> <!-- right panel -->
+      <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);">  
+      <%= form_tag(user_tests_path,method: :put) do %>
+        <div class="panel-body" style="margin-left: 10px;margin-right: 10px;">
+        	<%@questions.each do |question|%>
+          <div class="col-md-6">
+            <br><span class="blue">Question:</span> <%= question.description %><br>
+            <%= radio_button_tag 'test_data', 'answer'%>
+						<div class="opt1"><span class="orange">(A).</span> <%= question.answer.option1%></div>
+            <%= radio_button_tag 'test_data', 'answer'%>
+						<div class="opt1"><span class="orange">(B).</span> <%= question.answer.option2%></div>
+            <%= radio_button_tag 'test_data', 'answer'%>
+						<div class="opt1"><span class="orange">(C).</span> <%= question.answer.option3%></div>
+            <%= radio_button_tag 'test_data', 'answer'%>
+						<div class="opt1"><span class="orange">(D).</span> <%= question.answer.option4%></div><br>
+          </div>
+          <%= hidden_field_tag :page, (@i || 1) %>
+          <%= submit_tag "Next" %>
+          <%end%>
+        </div>
+        <%end%>
+      </div>
+      
+   </div>
+</div>
+</div>
