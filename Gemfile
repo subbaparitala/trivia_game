@@ -10,6 +10,7 @@ end
 gem 'rails', '~> 5.0.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
+gem "nested_form"
 
 gem 'bootstrap-sass'
 # Use Puma as the app server
