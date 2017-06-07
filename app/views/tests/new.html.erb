@@ -1,0 +1,14 @@
+
+<div class="col-md-10 col-md-offset-2">
+<%= form_for @test,url: user_tests_path do |f| %>
+<%=f.label "Category"%>
+<%= select_tag "test[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
+            %>
+<%=f.submit "Test Now"%>
+<% end %>
+</div>
+<script>
+$(document).ready(function(){
+	$("#test_category_ids").select2();
+})
+</script>
