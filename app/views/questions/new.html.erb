@@ -1,0 +1,33 @@
+
+<div class="col-md-10 col-md-offset-2">
+<%= nested_form_for @question,url: user_questions_path do |f| %>
+<%=f.label "Category"%>
+<%= select_tag "question[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
+            %>
+
+<%=f.label :description%>
+<p>(Please select the correct answer)</p>
+ <%= f.text_area :description %>
+<%= f.fields_for :answer do |answer_form| %>
+  <%=f.label :option1%>
+  <%= f.radio_button :correct_answer, 1 %> 
+  <%= answer_form.text_field :option1 %>
+  <%=f.label :option2%>
+   <%= f.radio_button :correct_answer, 2 %>
+  <%= answer_form.text_field :option2 %>
+  <%=f.label :option3%>
+   <%= f.radio_button :correct_answer, 3 %>
+  <%= answer_form.text_field :option3 %>
+  <%=f.label :option4%>
+   <%= f.radio_button :correct_answer, 4 %>
+  <%= answer_form.text_field :option4 %>
+  <%#= answer_form.link_to_remove "Remove this task" %>
+  <%=f.submit "create"%>
+<% end %>
+<%end%>
+</div>
+<script>
+$(document).ready(function(){
+	$("#question_category_ids").select2();
+})
+</script>
