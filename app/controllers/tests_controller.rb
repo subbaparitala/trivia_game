@@ -6,6 +6,8 @@ class TestsController < ApplicationController
   def create
    test = current_user.tests.new(test_params)
    test.save
+   @questions = Question.all.paginate(:page => params[:page], :per_page => 1)
+   # @questions = Question.select{|que| que.category_ids.collect{test.category_ids.include?(k)}}
   end
   
 
