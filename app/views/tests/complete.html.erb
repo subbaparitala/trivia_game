@@ -17,6 +17,7 @@
         	<% @test_datums.each do |test_data| %>
         	<li class="list-group-item"><%= "Question "+test_data.question_id.to_s%>: <%= test_answer test_data.answer_id %> <%= check_answer test_data.answer_id,test_data.question_id %></li>
         	<%end%>
+        	<li class="list-group-item">Total Marks : <%= @test.total_marks.to_i %> / <%= @test_datums.count*4 %></li>
         </ul>
         </div>
         </div>

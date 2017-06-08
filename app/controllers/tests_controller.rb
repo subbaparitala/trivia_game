@@ -32,15 +32,18 @@ class TestsController < ApplicationController
       end
        @questions = Question.all.paginate(:page => @page, :per_page => 1)
        path = complete_user_test_path(current_user, @test) 
-       redirect_to path if (@questions.count).eql?(@page.to_i-1)
+      if (@questions.count).eql?(@page.to_i-1)
+        @test.count_total_marks
+        redirect_to path
+      end
     rescue Exception => e
       redirect_to request_error_user_tests_path(current_user)
     end
   end
 
   def complete
-    test = Test.find params[:id]
-    @test_datums = test.test_datums
+    @test = Test.find params[:id]
+    @test_datums = @test.test_datums
   end
 
   def request_error
