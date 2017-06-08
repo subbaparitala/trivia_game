@@ -4,7 +4,10 @@
 <%=f.label "Category"%>
 <%= select_tag "test[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
             %>
-<%=f.submit "Test Now"%>
+ <center>
+ 	<%=f.submit "Test Now" ,class: 'btn btn-primary btn-test'%>
+ </center>
+
 <% end %>
 </div>
 <script>
