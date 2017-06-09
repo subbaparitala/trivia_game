@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
 
   def create
   	question = current_user.questions.create(question_params)
-    params[:question][:category_ids].each do |category_id|
+    (params[:question][:category_ids] || []).each do |category_id|
       question.question_categories.create(category_id: category_id)
     end
   	redirect_to user_question_path(current_user, question)
