@@ -4,6 +4,7 @@ class Test < ApplicationRecord
 	has_many :test_datums
 	has_reputation :votes, source: :user, aggregated_by: :sum
 	has_many :questions, through: :user
+	
 	def count_total_marks
 		count = 0
 		self.test_datums.each do |test_data|

@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :questions
   has_many :tests
   has_many :answers, through: :tests
+  has_reputation :votes, source: {reputation: :votes, of: :questions}, aggregated_by: :sum
+  
  def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
