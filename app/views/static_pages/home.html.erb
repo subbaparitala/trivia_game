@@ -1,7 +1,23 @@
 <% provide(:title, "Home") %>
-<div class="center jumbotron">
-    <h1>Trivia Game</h1>
-    <p>
-      This is the home page for the Trivia Game
-    </p>
+
+<div class="container">
+<div class="row">
+<%= render partial: 'layouts/side_pane' %>
+<div class="col-sm-9 col-md-9">
+<div class="well">
+  <h1>Trivia Game</h1>
+  <p>
+    This is the home page for the Trivia Game
+  </p>
+
 </div>
+</div>
+</div>
+</div>
+<style>
+body{margin-top:50px;}
+.glyphicon { margin-right:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+</style>

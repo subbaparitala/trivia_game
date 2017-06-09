@@ -15,6 +15,7 @@ module TestsHelper
     return "(D)"
    end	
   end
+  
   def check_answer answer_id,question_id
    html = Question.find(question_id).correct_answer.to_i.eql?(answer_id.to_i) ? "<span class='col_green'>Correct Answer<span>" : "<span class='col_red'>Wrong Answer</span>"
    return html.html_safe

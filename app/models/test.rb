@@ -1,10 +1,12 @@
 class Test < ApplicationRecord
 	belongs_to :user
-	serialize :category_ids, Array
+	# serialize :category_ids, Array
 	has_many :test_datums
+	has_many :test_categories
+	has_many :categories, through: :test_categories
 	has_reputation :votes, source: :user, aggregated_by: :sum
 	has_many :questions, through: :user
-	
+	validates :name, :presence => true
 	def count_total_marks
 		count = 0
 		self.test_datums.each do |test_data|
@@ -14,6 +16,6 @@ class Test < ApplicationRecord
 		    count = count - 1;
 		    end
        end
-      self.update_attributes(total_marks: count)
+      self.update_attributes(total_marks: count,status: 'completed')
 	end
 end

@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
   resources :users,only: [] do
-  	resources :tests do
+    collection do 
+      get 'my_results'
+      get 'all_results'
+    end
+  	resources :tests,except: [:index,:create] do
       collection do 
-        match 'tests', to: 'tests#create', via: [:get, :post]
+        match 'tests', to: 'tests#create_test', via: [:get, :post]
         get 'request_error'
       end
       member do 

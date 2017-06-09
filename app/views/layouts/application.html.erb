@@ -29,6 +29,12 @@
 </script>
 <div id="container">
 <div id="user_new">
+<% if flash[:errors] %>
+  <div class="alert alert-danger notice">
+    <strong><%= flash[:errors] %></strong> 
+    <span class="glyphicon glyphicon-hand-up cross"></span>
+  </div>
+<% end %>
 <% if user_signed_in? %>
       Your Reputation <%= current_user.reputation_for(:votes).to_i %>
 <% else %>

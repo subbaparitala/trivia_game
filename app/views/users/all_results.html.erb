@@ -1,0 +1,49 @@
+<div class="container">
+<div class="row">
+<%= render partial: 'layouts/side_pane' %>
+<div class="col-sm-9 col-md-9">
+<div class="well">
+  <div class="filter">
+  	<%= form_tag(all_results_users_path, method: :get) do%>
+			<div class="control-group">
+		    <%=label_tag "Category"%>
+		    <div class="controls col-md-12">
+		      <%= select_tag "category_ids", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 32%',"data-required" => "true"
+		          %>
+          <%= number_field_tag "top",nil,class: 'col-md-4 form-control' ,style: 'width:200px;',placeholder: 'No of Less users'%>
+          <%= number_field_tag "less",nil,class: 'col-md-4 form-control',style: 'width:200px;',placeholder: 'No of Top users'%>
+		     </div>
+		     <div class='col-md-3'>
+		     <%=submit_tag 'filter', class: 'btn btn-success'%>
+		    </div>
+			</div>
+  	<% end %>
+  </div>
+  <table class="table table-striped custab">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Test Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% unless @tests.empty? %>
+  <% @tests.each.with_index(1) do |test,index|%>
+    <tr>
+      <td><%= index %></td>
+      <td><%= test.name %></td>
+      <td><%= link_to "check results",complete_user_test_path(test.user,test)%></td>
+    </tr>
+  <% end %>
+  <%else%>
+    <span>No result found</span>
+  <%end%>
+  </table>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+$("#category_ids").select2()
+</script>

@@ -7,26 +7,13 @@
   <!-- welcome content -->
   <div class="row">
     <div class="col-md-10 col-md-offset-1"> <!-- right panel -->
-      <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);">  
-      <%= form_tag(user_tests_path,method: :post) do %>
+      <div class="panel panel-default" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);"> 
+      <% unless @questions.empty? %> 
+      <%= form_tag(tests_user_tests_path,method: :post) do %>
         <div class="panel-body" style="margin:40px 10px">
         	<%= hidden_field_tag :test_start, true%>
           <%= hidden_field_tag :test_id, @test.id%>
-
           <%@questions.each do |question|%>
-
-
-<div class="question">
-  <%= simple_format question.description %>
-  <em>
-    -- <%= question.user.username %>
-    | <%= pluralize question.reputation_for(:votes).to_i, "vote" %>
-    | <%= link_to "up", vote_user_question_path(question.user.id, question.id, type: "up"), method: "post" %>
-    | <%= link_to "down", vote_user_question_path(question.user.id, question.id, type: "down"), method: "post" %>
-  </em>
-</div>
-
-
           <%= hidden_field_tag :question_id, question.id%>
           <div class="col-md-10 question_sec">
             <div class="opt2">
@@ -58,13 +45,29 @@
             </ul>
           </div>
           <%= hidden_field_tag :page, (@page || 1) %>
-          <div class="btn-div">
-          <%= submit_tag "Next", class: 'btn btn-primary btn-next' %>
-          <%= submit_tag "Prev" ,class: 'btn btn-primary btn-prev' if @page.to_i > 1 %>
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="question_vote col-md-6">
+                <em>
+                  -- <%= question.user.username %>
+                  | <%= pluralize question.reputation_for(:votes).to_i, "vote" %>
+                  | <%= link_to image_tag('/assets/thumbs-up-icon.png',width: '23px;'), vote_user_question_path(question.user.id, question.id, type: "up"),class: 'thumb_up', method: "post" %>
+                  | <%= link_to image_tag('/assets/thumbs-down-icon.png',width: '23px;'), vote_user_question_path(question.user.id, question.id, type: "down"),class: 'thumb_down', method: "post" %>
+                </em>
+              </div>
+              <div class="btn-div col-md-6">
+              <%= submit_tag "Next", class: 'btn btn-primary btn-next' %>
+              <%= submit_tag "Prev" ,class: 'btn btn-primary btn-prev' if @page.to_i > 1 %>
+              </div>
+            </div>
           </div>
           <%end%>
         </div>
-        <%end%>
+      <%end%>
+      <%else%>
+      <p>There is no question for this categories</p>
+      <%end%>
       </div>
       
    </div>

@@ -1,14 +1,23 @@
 
 <div class="col-md-10 col-md-offset-2">
-<%= form_for @test,url: user_tests_path do |f| %>
-<%=f.label "Category"%>
-<%= select_tag "test[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
-            %>
- <center>
- 	<%=f.submit "Test Now" ,class: 'btn btn-primary btn-test'%>
- </center>
-
-<% end %>
+	<%= form_for @test,url: tests_user_tests_path,class: 'form-horizontal' do |f| %>
+		<div class="control-group">
+	    <%=f.label "Category", class: 'control-label'%>
+	    <div class="controls">
+	     <%= select_tag "test[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
+	          %>
+	    </div>
+		</div>
+		<div class="control-group">
+	    <%=f.label :name, class: 'control-label'%>
+	    <div class="controls">
+	     <%= f.text_field :name,class: 'form-control'%>
+	    </div>
+		</div>
+	<center>
+		<%=f.submit "Test Now" ,class: 'btn btn-primary btn-test'%>
+	</center>
+	<% end %>
 </div>
 <script>
 $(document).ready(function(){

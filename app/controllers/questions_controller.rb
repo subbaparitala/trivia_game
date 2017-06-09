@@ -13,6 +13,9 @@ class QuestionsController < ApplicationController
 
   def create
   	question = current_user.questions.create(question_params)
+    params[:question][:category_ids].each do |category_id|
+      question.question_categories.create(category_id: category_id)
+    end
   	redirect_to user_question_path(current_user, question)
   end
 
@@ -34,6 +37,6 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-   params.require(:question).permit(:description,:correct_answer,:category_ids => [], answer_attributes: [:id, :option1,:option2,:option3,:option4,:_destroy])
+   params.require(:question).permit(:description,:correct_answer, answer_attributes: [:id, :option1,:option2,:option3,:option4,:_destroy])
   end
 end
