@@ -6,7 +6,7 @@ class User < ApplicationRecord
  
   has_many :questions
   has_many :tests
-
+  has_many :answers, through: :tests
  def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 

@@ -26,6 +26,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.1.1'
 gem 'will_paginate', '~> 3.1.0'
 gem 'omniauth-facebook'
+gem 'activerecord-reputation-system'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

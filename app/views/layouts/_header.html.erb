@@ -5,7 +5,7 @@
     <nav>
   <ul class="nav navbar-nav navbar-right">
     <li><%= link_to "Home",   root_path %></li>
-     <li><%= link_to "Crete Question", new_user_question_path(current_user) if user_signed_in? %></li>
+     <li><%= link_to "Create Question", new_user_question_path(current_user) if user_signed_in? %></li>
     <% if user_signed_in? %>
       <li><%= link_to "Test",new_user_test_path(current_user) %></li>
       <li class ="dropdown">

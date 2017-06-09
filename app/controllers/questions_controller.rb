@@ -26,6 +26,12 @@ class QuestionsController < ApplicationController
   def update
   end
 
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @question = Question.find(params[:id])
+    @question.add_or_update_evaluation(:votes, value, current_user)
+  end
+
   private
   def question_params
    params.require(:question).permit(:description,:correct_answer,:category_ids => [], answer_attributes: [:id, :option1,:option2,:option3,:option4,:_destroy])

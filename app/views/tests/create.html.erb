@@ -14,6 +14,19 @@
           <%= hidden_field_tag :test_id, @test.id%>
 
           <%@questions.each do |question|%>
+
+
+<div class="question">
+  <%= simple_format question.description %>
+  <em>
+    -- <%= question.user.username %>
+    | <%= pluralize question.reputation_for(:votes).to_i, "vote" %>
+    | <%= link_to "up", vote_user_question_path(question.user.id, question.id, type: "up"), method: "post" %>
+    | <%= link_to "down", vote_user_question_path(question.user.id, question.id, type: "down"), method: "post" %>
+  </em>
+</div>
+
+
           <%= hidden_field_tag :question_id, question.id%>
           <div class="col-md-10 question_sec">
             <div class="opt2">

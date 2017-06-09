@@ -12,11 +12,12 @@ Rails.application.routes.draw do
         get 'complete'
       end
     end
-  	resources :questions do
+  	resources :questions  do
   	   collection do
           get 'questions'
        end
       resources :answers
+      member {post :vote }
   	end
   end
 end

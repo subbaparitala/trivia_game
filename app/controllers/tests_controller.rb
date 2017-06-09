@@ -50,6 +50,12 @@ class TestsController < ApplicationController
   end
   
 
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @question = Question.find(params[:id])
+    @question.add_evaluation(:votes, value, current_user)
+  end
+
   private
   def test_params
     params.require(:test).permit(:category_ids => [])
