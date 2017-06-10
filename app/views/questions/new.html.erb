@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid" style="background:#EDEDEE">
   <div class="container">
   <div class="row" style="margin-bottom:10px;margin-top:10px;">
@@ -12,19 +14,20 @@
         <div class="panel-body" style="margin:40px 10px">
           <div class="col-md-10 question_new">
             <div class="form-group"><%=f.label "Category",class: "col-md-3"%>
-              <div class="col-md-9"><%= select_tag "question[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
+              <div class="col-md-9"><%= select_tag "question[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }), placeholder: "Please Select the Category", :multiple => true,:style => 'width: 100%',"data-required" => "true"
                   %>
               </div>
             </div>
+            <%= render 'error_messages' %>
             <div class="form-group"><%=f.label :description,class: "col-md-3"%>
-              <div class="col-md-9"><%= f.text_area :description ,class: 'form-control'%></div>
+              <div class="col-md-9"><%= f.text_area :description, placeholder: "Please Enter Description of the Question", class: 'form-control'%></div>
             </div>
-            <span>(Please select the correct answer)</span>
+            <span>(Please select the correct answer on clicking option)</span>
             <div class="opt1">
               <ul>
             <%= f.fields_for :answer do |answer_form| %>
               <li>
-                <%= f.radio_button :correct_answer, 1 %> 
+                <%= f.radio_button :correct_answer, 1 %>
                 <%=f.label :option1,class: 'col-md-3' ,for: 'question_correct_answer_1'%><%= answer_form.text_field :option1,class: 'col-md-8 form-control' %>
                 <div class="check"></div>
               </li>

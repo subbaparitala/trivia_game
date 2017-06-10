@@ -1,17 +1,30 @@
 
 <div class="col-md-10 col-md-offset-2">
 	<%= form_for @test,url: tests_user_tests_path,class: 'form-horizontal' do |f| %>
+	<% if @test.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= pluralize(@test.errors.count, "error") %> 
+      prohibited this story from being saved
+    </div>
+    <ul>
+      <% @test.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 		<div class="control-group">
 	    <%=f.label "Category", class: 'control-label'%>
 	    <div class="controls">
-	     <%= select_tag "test[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 100%',"data-required" => "true"
+	     <%= select_tag "test[category_ids]", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }), placeholder: "Please Select the Category", :multiple => true,:style => 'width: 100%',"data-required" => "true"
 	          %>
 	    </div>
 		</div>
 		<div class="control-group">
-	    <%=f.label :name, class: 'control-label'%>
+	    *<%=f.label :name, class: 'control-label'%>
 	    <div class="controls">
-	     <%= f.text_field :name,class: 'form-control'%>
+	     <%= f.text_field :name, placeholder: "Please Enter the Name of the Test", class: 'form-control'%>
 	    </div>
 		</div>
 	<center>

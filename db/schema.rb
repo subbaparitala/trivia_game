@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608225148) do
+ActiveRecord::Schema.define(version: 20170609120833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20170608225148) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_categories", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "questions", force: :cascade do |t|
@@ -83,6 +90,13 @@ ActiveRecord::Schema.define(version: 20170608225148) do
     t.index ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type", using: :btree
   end
 
+  create_table "test_categories", force: :cascade do |t|
+    t.integer  "test_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "test_data", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "answer_id"
@@ -97,6 +111,9 @@ ActiveRecord::Schema.define(version: 20170608225148) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.decimal  "total_marks"
+    t.string   "name"
+    t.string   "status"
+    t.integer  "last_page"
   end
 
   create_table "users", force: :cascade do |t|

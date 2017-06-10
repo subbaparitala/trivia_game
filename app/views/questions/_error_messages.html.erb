@@ -1,0 +1,13 @@
+<% if @question.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= pluralize(@question.errors.count, "error") %> 
+      prohibited this story from being saved
+    </div>
+    <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

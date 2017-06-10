@@ -36,7 +36,7 @@
   </div>
 <% end %>
 <% if user_signed_in? %>
-      Your Reputation <%= current_user.reputation_for(:votes).to_i %>
+    Your Reputation <%= current_user.reputation_for(:votes).to_i %>
 <% else %>
   <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
   <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>

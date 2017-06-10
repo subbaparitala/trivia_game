@@ -22,6 +22,7 @@
     <tr>
       <th>No.</th>
       <th>Test Name</th>
+      <th>Score</th>
       <th></th>
     </tr>
   </thead>
@@ -30,6 +31,7 @@
     <tr>
       <td><%= index %></td>
       <td><%= test.name %></td>
+      <td><%= test.total_marks.to_i %></td>
       <td><%= link_to "check results",complete_user_test_path(current_user,test)%></td>
     </tr>
   <% end %>

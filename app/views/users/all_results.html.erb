@@ -8,10 +8,10 @@
 			<div class="control-group">
 		    <%=label_tag "Category"%>
 		    <div class="controls col-md-12">
-		      <%= select_tag "category_ids", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }),:multiple => true,:style => 'width: 32%',"data-required" => "true"
+		      <%= select_tag "category_ids", options_for_select(Category.all.collect{|p| [ p.title, p.id ] }), placeholder: 'Select Category', :multiple => true,:style => 'width: 32%',"data-required" => "true"
 		          %>
-          <%= number_field_tag "top",nil,class: 'col-md-4 form-control' ,style: 'width:200px;',placeholder: 'No of Less users'%>
-          <%= number_field_tag "less",nil,class: 'col-md-4 form-control',style: 'width:200px;',placeholder: 'No of Top users'%>
+          <%= number_field_tag "top",nil,class: 'col-md-4 form-control' ,style: 'width:200px;',placeholder: 'Select No of Top users'%>
+          <%= number_field_tag "less",nil,class: 'col-md-4 form-control',style: 'width:200px;',placeholder: 'Select No of Below users'%>
 		     </div>
 		     <div class='col-md-3'>
 		     <%=submit_tag 'filter', class: 'btn btn-success'%>
@@ -24,6 +24,7 @@
     <tr>
       <th>No.</th>
       <th>Test Name</th>
+      <th> Scores </th>
       <th></th>
     </tr>
   </thead>
@@ -32,7 +33,7 @@
     <tr>
       <td><%= index %></td>
       <td><%= test.name %></td>
-      <td><%= link_to "check results",complete_user_test_path(test.user,test)%></td>
+      <td><%= test.total_marks.to_i %></td>
     </tr>
   <% end %>
   <%else%>

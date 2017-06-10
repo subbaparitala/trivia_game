@@ -12,11 +12,17 @@ class QuestionsController < ApplicationController
   end
 
   def create
-  	question = current_user.questions.create(question_params)
+  	@question = current_user.questions.new(question_params)
     (params[:question][:category_ids] || []).each do |category_id|
-      question.question_categories.create(category_id: category_id)
+      @question.question_categories.create(category_id: category_id)
     end
-  	redirect_to user_question_path(current_user, question)
+    respond_to do |format|
+      if @question.save
+        format.html {redirect_to user_question_path(current_user, @question), notice: "Sucessfully created the question"}
+      else
+        format.html { redirect_to new_user_question_path(current_user), notice: "Enter description and answer" }
+      end
+    end
   end
 
   def edit 

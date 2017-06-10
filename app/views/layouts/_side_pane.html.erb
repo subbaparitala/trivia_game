@@ -8,8 +8,10 @@
         </h4>
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
+
         <div class="panel-body">
           <table class="table">
+            <% if user_signed_in? %>
             <tr>
               <td>
                   <span class="glyphicon glyphicon-pencil text-primary"></span>
@@ -17,6 +19,7 @@
               </td>
             </tr>
             <tr>
+            <% end %>
               <td>
                   <span class="glyphicon glyphicon-flash text-success"></span>
                   <%= link_to "All Results",all_results_users_path %>
