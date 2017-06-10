@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   def create
   	@question = current_user.questions.new(question_params)
     (params[:question][:category_ids] || []).each do |category_id|
-      @question.question_categories.create(category_id: category_id)
+      @question.question_categories.new(category_id: category_id)
     end
     respond_to do |format|
       if @question.save
