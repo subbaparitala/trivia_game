@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       collection do 
         match 'tests', to: 'tests#create_test', via: [:get, :post]
         get 'request_error'
+        get 'my_tests'
       end
       member do 
         get 'complete'

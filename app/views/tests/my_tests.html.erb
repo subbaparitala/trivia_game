@@ -4,7 +4,7 @@
 <div class="col-sm-9 col-md-9">
 <div class="well">
    <div class="filter">
-    <%= form_tag(my_results_users_path, method: :get) do%>
+    <%= form_tag(my_tests_user_tests_path(current_user), method: :get) do%>
       <div class="control-group">
         <%=label_tag "Category"%>
         <div class="controls col-md-9">
@@ -22,7 +22,6 @@
     <tr>
       <th>No.</th>
       <th>Test Name</th>
-      <th>Score</th>
       <th></th>
     </tr>
   </thead>
@@ -31,8 +30,17 @@
     <tr>
       <td><%= index %></td>
       <td><%= test.name %></td>
-      <td><%= test.total_marks.to_i %></td>
-      <td><%= link_to "check results",complete_user_test_path(current_user,test)%></td>
+      <td>
+
+       <%= form_tag tests_user_tests_path(current_user) ,method: :post do%>
+       	  <%= hidden_field_tag :test_start, true%>
+          <%= hidden_field_tag :test_id, test.id %>
+          <%= hidden_field_tag :question_id, test.last_page %>
+          <%= hidden_field_tag :page, test.last_page %>
+          <%= hidden_field_tag :test_token, test.test_token %>
+          <%= submit_tag 'Back to Test',class: 'btn btn-primary'%>
+       <% end %>
+     </td>
     </tr>
   <% end %>
   <%else%>

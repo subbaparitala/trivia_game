@@ -1,9 +1,9 @@
 class Test < ApplicationRecord
 	belongs_to :user
 	# serialize :category_ids, Array
-	has_many :test_datums
-	has_many :test_categories
-	has_many :categories, through: :test_categories
+	has_many :test_datums, dependent: :destroy
+	has_many :test_categories , dependent: :destroy
+	has_many :categories, through: :test_categories 
 	has_reputation :votes, source: :user, aggregated_by: :sum
 	has_many :questions, through: :user
 	validates :name, :presence => true

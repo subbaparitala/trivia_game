@@ -1,4 +1,5 @@
 class TestsController < ApplicationController
+ before_filter :authenticate_user!
   # def index
   #    redirect_to request_error_user_tests_path(current_user)
   # end
@@ -11,13 +12,15 @@ class TestsController < ApplicationController
     begin
       raise 'Session expired'  if request.get?
       unless  params["test_start"].eql?('true')
-        @test = current_user.tests.create(test_params)
+        @test = current_user.tests.create(test_params.merge!(:test_token=> params[:authenticity_token][0..16]))
         (params[:test][:category_ids] || []).each do |category_id|
           test_categories = @test.test_categories.create(category_id: category_id)
         end
       else
         @test = Test.find(params[:test_id])
+        raise 'Authentication failed' unless @test.user_id.eql?(current_user.id) && (params[:token] || params[:test_token]).eql?(@test.test_token)
         question_id = params[:commit] == "Next" ? params[:question_id] : (params[:question_id].to_i - 1)
+        question_id = params[:question_id] if params[:test_token].present?
         @test_data =  @test.test_datums.find_by_question_id(question_id) rescue nil
         if params[:commit] == "Next"
           if @test_data.present?
@@ -28,6 +31,8 @@ class TestsController < ApplicationController
             test_data.save
           end
           @page = params[:page].to_i + 1
+        elsif params[:test_token].present?
+          @page = params[:page].to_i
         else
           @page = params[:page].to_i - 1
         end
@@ -57,6 +62,11 @@ class TestsController < ApplicationController
   end
 
   def request_error
+  end
+
+  def my_tests
+    @tests = Test.where(status: 'pending')
+    @tests = Test.joins(:test_categories).where('test_categories.category_id IN (?) AND status = ? ',params[:category_ids],'panding') if params[:category_ids].present? 
   end
   
 

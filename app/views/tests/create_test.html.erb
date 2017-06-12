@@ -13,6 +13,7 @@
         <div class="panel-body" style="margin:40px 10px">
         	<%= hidden_field_tag :test_start, true%>
           <%= hidden_field_tag :test_id, @test.id%>
+          <%= hidden_field_tag :token, @test.test_token%>
           <%@questions.each do |question|%>
           <%= hidden_field_tag :question_id, question.id%>
           <div class="col-md-10 question_sec">
