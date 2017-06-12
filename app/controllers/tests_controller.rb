@@ -66,7 +66,7 @@ class TestsController < ApplicationController
 
   def my_tests
     @tests = Test.where(status: 'pending')
-    @tests = Test.joins(:test_categories).where('test_categories.category_id IN (?) AND status = ? ',params[:category_ids],'panding') if params[:category_ids].present? 
+    @tests = Test.joins(:test_categories).where('test_categories.category_id IN (?) AND status = ? ',params[:category_ids],'pending') if params[:category_ids].present? 
   end
   
 
