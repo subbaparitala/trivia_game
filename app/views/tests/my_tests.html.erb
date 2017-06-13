@@ -35,8 +35,8 @@
        <%= form_tag tests_user_tests_path(current_user) ,method: :post do%>
        	  <%= hidden_field_tag :test_start, true%>
           <%= hidden_field_tag :test_id, test.id %>
-          <%= hidden_field_tag :question_id, test.last_page %>
-          <%= hidden_field_tag :page, test.last_page %>
+          <%= hidden_field_tag :question_id, (test.last_page || 1) %>
+          <%= hidden_field_tag :page, (test.last_page || 1) %>
           <%= hidden_field_tag :test_token, test.test_token %>
           <%= submit_tag 'Back to Test',class: 'btn btn-primary'%>
        <% end %>
